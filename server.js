@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
 
-// 🔥 IMPORTANT FIX
+// Fix body parsing for Wix
 app.use(express.json({ type: "*/*" }));
 
 app.post("/v1/calculate-additional-fees", (req, res) => {
-
   console.log("Request received from Wix");
   console.log("Body:", req.body);
 
