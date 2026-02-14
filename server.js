@@ -16,18 +16,18 @@ app.post("/v1/calculate-additional-fees", (req, res) => {
   const fee = 39; // your service fee
 
   res.json({
-    additionalFees: [
-      {
-        name: "Service Fee",
-        amount: {
-          type: "FIXED",
-          value: fee,
-          currency: "INR"   // ⚠ change if your store currency is different
-        }
+  additionalFees: [
+    {
+      code: "service-fee",
+      name: "Service Fee",
+      amount: {
+        type: "FIXED",
+        value: 39
       }
-    ]
-  });
+    }
+  ]
 });
+
 
 // 🔥 VERY IMPORTANT FOR RENDER
 const PORT = process.env.PORT || 3000;
