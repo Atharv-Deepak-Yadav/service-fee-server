@@ -1,3 +1,7 @@
+const express = require("express");
+const app = express();
+
+app.use(express.json());  // 🔥 ADD THIS
 app.post("/v1/calculate-additional-fees", (req, res) => {
 
   const cartSubtotal =
@@ -12,7 +16,7 @@ app.post("/v1/calculate-additional-fees", (req, res) => {
         amount: {
           type: "FIXED",
           value: fee,
-          currency: "USD"
+          currency:  "INR"
         }
       }
     ]
