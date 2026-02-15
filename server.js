@@ -16,17 +16,19 @@ app.post("/v1/calculate-additional-fees", (req, res) => {
     console.log("Decoded Wix Payload:", decoded);
 
     res.json({
-      additionalFees: [
-        {
-          code: "service-fee",
-          name: "Service Fee",
-          amount: {
-            type: "FIXED",
-            value: 39
-          }
-        }
-      ]
-    });
+  additionalFees: [
+    {
+      code: "service-fee",
+      name: "Service Fee",
+      taxable: false,
+      amount: {
+        type: "FIXED",
+        value: 39
+      }
+    }
+  ]
+});
+
 
   } catch (err) {
     console.error("Error decoding token:", err);
