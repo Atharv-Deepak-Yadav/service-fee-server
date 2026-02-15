@@ -15,19 +15,20 @@ app.post("/v1/calculate-additional-fees", (req, res) => {
 
     console.log("Decoded Wix Payload:", decoded);
 
-    res.json({
+   res.json({
   additionalFees: [
     {
       code: "service-fee",
       name: "Service Fee",
       taxable: false,
       amount: {
-        type: "FIXED",
-        value: 39
+        value: "39.00",
+        currency: "USD"
       }
     }
   ]
 });
+
 
 
   } catch (err) {
