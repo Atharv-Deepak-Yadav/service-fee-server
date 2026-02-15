@@ -1,15 +1,19 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
+
 const app = express();
 
-// 🔥 IMPORTANT: Use RAW body (Wix sends raw payload)
+// Wix sends RAW body
 app.use(express.raw({ type: "*/*" }));
 
 app.post("/v1/calculate-additional-fees", (req, res) => {
   try {
-    // Convert raw body to JSON
-    const body = JSON.parse(req.body.toString());
+    const token = req.body.toString();
 
-    console.log("Parsed body from Wix:", body);
+    // Decode Wix JWT payload
+    const decoded = jwt.decode(token);
+
+    console.log("Decoded Wix Payload:", decoded);
 
     res.json({
       additionalFees: [
@@ -24,16 +28,12 @@ app.post("/v1/calculate-additional-fees", (req, res) => {
       ]
     });
 
-  } catch (error) {
-    console.error("Error parsing body:", error);
-
-    res.status(400).json({
-      error: "Invalid JSON"
-    });
+  } catch (err) {
+    console.error("Error decoding token:", err);
+    res.status(400).send("Error");
   }
 });
 
-// 🔥 Required for Render
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
